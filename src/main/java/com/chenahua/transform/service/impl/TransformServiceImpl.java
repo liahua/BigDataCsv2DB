@@ -142,6 +142,7 @@ public class TransformServiceImpl implements TransformService {
             for (Future providerFuture : providerFutures) {
                 providerFuture.get();
             }
+            finish = true;
             //等待生产者都结束 测试用防止 JUNIT直接退出,provider未启动
             lock.await();
         }
