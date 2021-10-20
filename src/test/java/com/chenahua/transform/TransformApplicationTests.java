@@ -27,6 +27,7 @@ class TransformApplicationTests {
     void contextLoads() throws SQLException, IOException, InterruptedException, ExecutionException {
 //        ArrayList<ReadTask> readTasks = transformService.providerMulti();
 //        System.out.println(readTasks);
+        int bbc=333333;
         transformService.transformCSV(true);
         ForkJoinPool forkJoinPool = new ForkJoinPool(5);
         ArrayList<Integer> integers = new ArrayList<>();
