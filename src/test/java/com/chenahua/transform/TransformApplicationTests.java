@@ -34,6 +34,8 @@ class TransformApplicationTests {
         for (int i = 0; i < 10; i++) {
             integers.add(i);
         }
+        int a=1;
+        int b=2;
     }
 
     @Test
