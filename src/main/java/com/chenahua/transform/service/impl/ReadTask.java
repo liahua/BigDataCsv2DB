@@ -46,7 +46,7 @@ public class ReadTask implements Runnable {
             if (b == NEW_LINE_CHAR_ASCII) {
                 log.debug(map.position() + "|" + pos + "|" + offset + "|" + this.toString());
                 byte[] bytes = new byte[offset - pos];
-                map.get(pos, bytes);
+//                map.get(pos, bytes);
                 provideMarketQuote(new String(bytes));
                 pos = offset;
             }
@@ -55,7 +55,7 @@ public class ReadTask implements Runnable {
             long length = realLength - pos;
             if (length != 0) {
                 byte[] bytes = new byte[(int) length];
-                map.get(pos, bytes);
+//                map.get(pos, bytes);
                 provideMarketQuote(new String(bytes));
             }
         }
