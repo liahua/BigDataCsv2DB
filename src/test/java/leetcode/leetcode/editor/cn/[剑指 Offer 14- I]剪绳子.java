@@ -31,7 +31,7 @@ import java.util.HashMap;
  *
  */
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution3 {
     public int cuttingRope(int n) {
         if (n == 2) {
             return 1;
