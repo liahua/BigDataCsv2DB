@@ -25,12 +25,10 @@ package leetcode.leetcode.editor.cn;//给你一根长度为 n 的绳子，请把
 // Related Topics 数学 动态规划 👍 476 👎 0
 
 
-import java.util.HashMap;
 
-/**
- *
- */
 //leetcode submit region begin(Prohibit modification and deletion)
+import java.util.Arrays;
+import java.math.BigInteger;
 class Solution3 {
     public int cuttingRope(int n) {
         if (n == 2) {

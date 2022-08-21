@@ -31,11 +31,11 @@ package leetcode.leetcode.editor.cn;//给你一根长度为 n 的绳子，请把
 // Related Topics 数学 动态规划 👍 203 👎 0
 
 
-import java.math.BigInteger;
-import java.util.Arrays;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+import java.util.Arrays;
+import java.math.BigInteger;
+class Solution4 {
 
 
 //    @Test
@@ -45,6 +45,7 @@ class Solution {
 
 
     public int cuttingRope(int n) {
+        
         final int MOD = 1000000007;
         BigInteger[] dp = new BigInteger[n + 2];
         Arrays.fill(dp,BigInteger.valueOf(0));
