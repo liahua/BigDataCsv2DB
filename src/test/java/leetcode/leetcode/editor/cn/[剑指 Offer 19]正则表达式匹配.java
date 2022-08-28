@@ -70,6 +70,7 @@ class Solution {
             if (lash_match_any_time ==c){
                 System.out.println("任意次"+p_char[i-1]+"索引为"+ (i-1));
             }
+            //todo 官方题解看到 匹配 "."
         }
     }
 }
