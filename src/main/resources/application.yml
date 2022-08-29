@@ -3,17 +3,17 @@ server:
 csvFile:
   path: D:\IdeaProjects\transform\src\main\resources\
   name: market_quote.csv
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.1.7:3306/eladmin
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: root
+#    url: jdbc:mysql://192.168.1.7:3306/eladmin
 
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
-    root: debug
+    com.chenahua.transform.TransformApplication: debug
 

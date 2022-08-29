@@ -70,7 +70,7 @@ public class TransformServiceImpl implements TransformService {
 
     @Value("${csvFile.path}${csvFile.name}")
     String filePath;
-    @Autowired
+//    @Autowired
     private HikariDataSource dataSource;
 
     ThreadPoolExecutor consumerPool = new ThreadPoolExecutor(1, 5, 20, TimeUnit.SECONDS, new SynchronousQueue<>(), ThreadFactoryBuilder.create().setNamePrefix("consumer-").setUncaughtExceptionHandler((t, e) -> {
