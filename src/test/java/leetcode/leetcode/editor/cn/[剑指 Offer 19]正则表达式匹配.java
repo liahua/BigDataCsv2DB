@@ -58,20 +58,48 @@ package leetcode.leetcode.editor.cn;//请实现一个函数用来匹配包含'. 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean isMatch(String s, String p) {
-        char[] s_char = s.toCharArray();
-        char[] p_char = p.toCharArray();
-        char all_match_once='.';
-        char lash_match_any_time = '*';
-        for (int i = 0; i < p_char.length; i++) {
-            char c = p_char[i];
-            if (all_match_once == c) {
-                System.out.println(". is ="+i);
+        int m = s.length();
+        int n = p.length();
+
+        boolean[][] f = new boolean[m + 1][n + 1];
+        f[0][0] = true;
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (getChar(p, j) == '*') {
+                    if (match(s, i, p, j - 1)) {
+                        f[i][j] = f[i - 1][j] || f[i][j - 2];
+                    } else {
+                        f[i][j] = f[i][j - 2];
+                    }
+                } else {
+                    if (match(s, i, p, j)) {
+                        f[i][j] = f[i - 1][j - 1];
+                    } else {
+                        f[i][j] = false;
+                    }
+                }
             }
-            if (lash_match_any_time ==c){
-                System.out.println("任意次"+p_char[i-1]+"索引为"+ (i-1));
-            }
-            //todo 官方题解看到 匹配 "."
+
         }
+        return f[m][n];
     }
+
+    private char getChar(String p, int j) {
+        return p.charAt(j - 1);
+    }
+
+
+    private boolean match(String s, int i, String p, int j) {
+        if (getChar(s, i) == getChar(p, j)) {
+            return true;
+        }
+        if (getChar(p, j) == '.') {
+            return true;
+        }
+        return false;
+    }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
