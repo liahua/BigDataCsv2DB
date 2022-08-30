@@ -8,14 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.caffeine.CaffeineCache;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.concurrent.*;
 
 @Configuration
@@ -57,40 +53,13 @@ public class CacheConfig {
                 .maximumSize(1000)
                 .recordStats()
                 .removalListener((key, value, cause) -> {
-                    log.info("自动移除key {}, value {} ,cause {}", key, value, cause);
                     if (RemovalCause.EXPIRED.equals(cause)) {
-                        log.info("由于key过期导致,重新进行加载,key:{}", key);
                         AsyncCache<String, String> cache = SpringUtil.getBean(AsyncCache.class);
                         cache.put(key, cacheLoader.asyncLoad(key, executor));
                     }
                 })
                 .executor(executor)
                 .buildAsync(cacheLoader);
-    }
-
-
-    private @NonNull LoadingCache<Object, Object> loadingCache(CacheLoader<Object, Object> cacheLoader) {
-        return Caffeine.newBuilder()
-                .expireAfterWrite(60, TimeUnit.SECONDS)
-                .refreshAfterWrite(10, TimeUnit.SECONDS)
-                .scheduler(Scheduler.forScheduledExecutorService(new ScheduledThreadPoolExecutor(5, THREAD_FACTORY)))
-                .maximumSize(1000)
-                .recordStats()
-                .removalListener((key, value, cause) -> {
-                    log.info("移除key {} ,value {} , cause {}", key, value, cause);
-                })
-                .build(cacheLoader);
-    }
-
-    //    @Bean("basicCache")
-    public CacheManager cacheManager(CacheLoader<Object, Object> cacheLoader) {
-
-        LoadingCache<Object, Object> build = loadingCache(cacheLoader);
-        CaffeineCache cache = new CaffeineCache("basic_cache", build);
-
-        SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
-        simpleCacheManager.setCaches(Collections.singleton(cache));
-        return simpleCacheManager;
     }
 
 
