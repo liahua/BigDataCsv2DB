@@ -121,3 +121,10 @@ TDSQL，TIDB
 
 [//]: # (todo)
 
+
+### Thread
+
+#### sync(thread)的坏处
+
+thread在结束时会自动触发thread.notify导致线程异常唤醒
+
