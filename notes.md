@@ -128,3 +128,6 @@ TDSQL，TIDB
 
 thread在结束时会自动触发thread.notify导致线程异常唤醒
 
+
+### 1 pod 2 container是什么表现
+

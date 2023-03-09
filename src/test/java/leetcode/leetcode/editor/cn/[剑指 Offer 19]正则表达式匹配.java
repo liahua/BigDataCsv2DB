@@ -56,7 +56,7 @@ package leetcode.leetcode.editor.cn;//请实现一个函数用来匹配包含'. 
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution_19 {
     public boolean isMatch(String s, String p) {
         int m = s.length();
         int n = p.length();
