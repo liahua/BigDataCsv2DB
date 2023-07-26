@@ -15,6 +15,7 @@
     <description>transform</description>
     <properties>
         <java.version>1.8</java.version>
+        <os.detection.classifierWithLikes>debian,rhel</os.detection.classifierWithLikes>
     </properties>
     <dependencies>
         <dependency>
@@ -22,11 +23,11 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>2.6.3</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-quartz</artifactId>-->
-<!--            <version>2.6.3</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-quartz</artifactId>-->
+        <!--            <version>2.6.3</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -111,11 +112,54 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.23.2</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
         <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <extensions>true</extensions>
+                <configuration>
+<!--                    &lt;!&ndash; 工具版本 &ndash;&gt;-->
+<!--                    <protocArtifact>com.google.protobuf:protoc:3.6.1:exe:${os.detected.classifier}-->
+<!--                    </protocArtifact>-->
+                    <protocExecutable>protoc</protocExecutable>
+                    <!--默认值，proto源文件路径-->
+                    <protoSourceRoot>./src/main/resources/proto</protoSourceRoot>
+                    <!--默认值，proto目标java文件路径-->
+                    <outputDirectory>./src/main/java</outputDirectory>
+                    <!--设置是否在生成java文件之前清空outputDirectory的文件，默认值为true，设置为false时也会覆盖同名文件-->
+                    <clearOutputDirectory>false</clearOutputDirectory>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--在执行mvn compile的时候会执行以下操作-->
+                        <phase>compile</phase>
+                        <goals>
+                            <!--生成OuterClass类-->
+                            <goal>compile</goal>
+                            <!--生成Grpc类-->
+                            <!--goal>compile-custom</goal-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

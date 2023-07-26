@@ -1,0 +1,9 @@
+syntax = "proto3";
+package liahua;
+option java_package = "com.chenahua.transform.protobuf";
+option java_outer_classname = "PersonProto";
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+}
